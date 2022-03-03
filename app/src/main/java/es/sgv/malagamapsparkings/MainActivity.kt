@@ -1,23 +1,20 @@
 package es.sgv.malagamapsparkings
 
 
-import androidx.fragment.app.FragmentManager
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.Polyline
-import com.google.android.gms.maps.model.PolylineOptions
-import java.util.jar.Manifest
+import com.google.android.gms.maps.model.*
+
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener  {
 
@@ -54,6 +51,41 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
         createMarkers()
         createPolylines()
+
+        // on marker click we are getting the title of our marker
+        // which is clicked and displaying it in a toast message.
+        mapa.setOnMarkerClickListener(OnMarkerClickListener { marker ->
+
+            val markerName = marker.title
+            Toast.makeText(this@MainActivity, "Se ha pulsado en: $markerName", Toast.LENGTH_SHORT).show()
+            // aqui va el codigo que quiero que se ejecute con cada click a los markers ->:
+            comprobarPrecioParking(marker)
+
+
+            false
+        })
+
+    }
+
+    private fun comprobarPrecioParking(marker:Marker){
+        var precioPorHora:Float = 1.90f
+
+        when (marker.title) {
+            "Parking Central" -> precioPorHora = 2.20f
+            "Garaje Málaga" -> precioPorHora = 1.60f
+            "Parking Alemania" -> precioPorHora = 2f
+            "Málaga Cruise terminal" -> precioPorHora = 6.70f
+            "Parking Muelle Uno" -> precioPorHora = 1.35f
+            "Parking Cervantes" -> precioPorHora = 1.55f
+            "Parking de la Malagueta" -> precioPorHora = 1.80f
+            "Aparcamiento Alcazaba" -> precioPorHora = 1.45f
+            "Parking Granados" -> precioPorHora = 1.65f
+            "Parking Tejon y Rodriguez" -> precioPorHora = 1.74f
+            "Parking Atlántida" -> precioPorHora = 2.20f
+            else -> precioPorHora = 1.90f
+        }
+        Toast.makeText(this, "El precio por hora en " + marker.title.toString() + " es de " + precioPorHora + "€.", Toast.LENGTH_LONG).show()
+
     }
 
     //
@@ -66,7 +98,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
     private fun createMarkers() {
 
-        mapa.addMarker(MarkerOptions().position(LatLng(36.717945709280535, -4.4209885597229)).title("Parking Central"))
+        mapa.addMarker(MarkerOptions().position(LatLng(36.717945709280535, -4.4209885597229)).title("Parking Central")) //.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin)));
         mapa.addMarker(MarkerOptions().position(LatLng(36.715757646413046, -4.424395271514863)).title("Garaje Málaga"))
         mapa.addMarker(MarkerOptions().position(LatLng(36.71436751762987, -4.424648157988138)).title("Parking Alemania"))
         mapa.addMarker(MarkerOptions().position(LatLng(36.7083624215518, -4.41416648632701)).title("Málaga Cruise terminal"))
@@ -80,6 +112,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
     }
 
+    fun onMarkerClick(marker: Marker?): Boolean {
+        var clicked : Boolean = false
+        return clicked
+    }
+
     private fun createPolylines(){
         //parking central
         var polylineOptions = PolylineOptions()
@@ -88,8 +125,23 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.717765106742185,-4.419722557067871))
             .add(LatLng(36.71866811518787,-4.41975474357605))
             .add(LatLng(36.717954309390805,-4.422565698623657 ))
+            .color(ContextCompat.getColor(this, R.color.blueMine)) //aqui cambio el color manualmente
+        //.width(20f)
+
 
         var polyLine: Polyline = mapa.addPolyline(polylineOptions)
+        polyLine.startCap = RoundCap()
+        polyLine.endCap = RoundCap()
+
+        //ejemplo con un pattern
+        /*polyLine.endCap = CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.nombreImagenPngEnDrawable))
+        val pattern:List<PatternItem> = listOf(Dot(), Gap(10f), Dash(50f), Gap(15f))
+        polyLine.pattern = pattern*/
+
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){
+            polyLine -> changeColor(polyLine) // = changeColor(it)
+        }
 
         //garaje malaga
         polylineOptions = PolylineOptions()
@@ -98,8 +150,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.715909657169554, -4.423735831877776))
             .add(LatLng(36.7157889882203, -4.424428288831428))
             .add(LatLng(36.71547042044409, -4.424337967914071))
+            .color(ContextCompat.getColor(this, R.color.greenMine))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Parking Alemania
         polylineOptions = PolylineOptions()
@@ -109,8 +164,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.71332247445023, -4.424211516989545))
             .add(LatLng(36.71352520265581, -4.424067007117632))
             .add(LatLng(36.71465951173844, -4.4245186083219386))
+            .color(ContextCompat.getColor(this, R.color.redMine))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Málaga Cruise terminal
         polylineOptions = PolylineOptions()
@@ -119,8 +177,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.7082845784525, -4.416555159195147))
             .add(LatLng(36.70941709763557, -4.414929823949872))
             .add(LatLng(36.70869454029994, -4.413431078864889))
+            .color(ContextCompat.getColor(this, R.color.yellowMine))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Parking Muelle Uno
         polylineOptions = PolylineOptions()
@@ -133,6 +194,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.72002660167358, -4.412838096509206))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        changeColor(polyLine)//aqui cambio el color aleatoriamente al inicializar
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Parking Cervantes
         polylineOptions = PolylineOptions()
@@ -143,6 +207,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.720055971845525, -4.41197737003281))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        changeColor(polyLine)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Parking de la Malagueta
         polylineOptions = PolylineOptions()
@@ -153,6 +220,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.72020518223683, -4.4090810619582586))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        changeColor(polyLine)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Aparcamiento Alcazaba
         polylineOptions = PolylineOptions()
@@ -163,6 +233,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.722692217434144, -4.416954925620978))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        changeColor(polyLine)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Parking Granados
         polylineOptions = PolylineOptions()
@@ -173,6 +246,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.7233059476188, -4.420031184794837))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        changeColor(polyLine)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Parking Tejon y Rodriguez
         polylineOptions = PolylineOptions()
@@ -183,6 +259,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.723296488074766, -4.421127800362509))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        changeColor(polyLine)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
 
         //Parking Atlántida
         polylineOptions = PolylineOptions()
@@ -193,6 +272,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             .add(LatLng(36.72596908686705, -4.419179855665685))
 
         polyLine= mapa.addPolyline(polylineOptions)
+        changeColor(polyLine)
+        polyLine.isClickable = true
+        mapa.setOnPolylineClickListener (){ changeColor(it)}
+    }
+
+    fun changeColor(polyline: Polyline){
+        val color = (0..3).random()
+        when(color){
+            0 -> polyline.color = ContextCompat.getColor(this, R.color.redMine)
+            1 -> polyline.color = ContextCompat.getColor(this, R.color.greenMine)
+            2 -> polyline.color = ContextCompat.getColor(this, R.color.blueMine)
+            3 -> polyline.color = ContextCompat.getColor(this, R.color.yellowMine)
+        }
     }
 
     //
