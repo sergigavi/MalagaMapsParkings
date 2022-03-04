@@ -1,6 +1,7 @@
 package es.sgv.malagamapsparkings
 
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -96,19 +97,38 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
         mapa.addMarker(marker)
     }
 
+    private fun getMisMarkers():ArrayList<MarkerOptions>{
+        var listaMarkers: ArrayList<MarkerOptions>
+
+        listaMarkers = ArrayList()
+        listaMarkers.add(MarkerOptions().position(LatLng(36.717945709280535, -4.4209885597229)).title("Parking Central"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.715757646413046, -4.424395271514863)).title("Garaje Málaga"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.71436751762987, -4.424648157988138)).title("Parking Alemania"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.7083624215518, -4.41416648632701)).title("Málaga Cruise terminal"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.719128808752735, -4.414080196160326)).title("Parking Muelle Uno"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.72000723055114, -4.4100939844815015)).title("Parking Cervantes"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.72023889429903, -4.408781367656602)).title("Parking de la Malagueta"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.7230797651669, -4.416673675450237)).title("Aparcamiento Alcazaba"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.723002711688146, -4.419805636637146)).title("Parking Granados"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.72381768457455, -4.421638774824797)).title("Parking Tejon y Rodriguez"))
+        listaMarkers.add(MarkerOptions().position(LatLng(36.72610202150593, -4.419189843500244)).title("Parking Atlántida"))
+
+        return  listaMarkers
+    }
+
     private fun createMarkers() {
 
-        mapa.addMarker(MarkerOptions().position(LatLng(36.717945709280535, -4.4209885597229)).title("Parking Central")) //.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin)));
-        mapa.addMarker(MarkerOptions().position(LatLng(36.715757646413046, -4.424395271514863)).title("Garaje Málaga"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.71436751762987, -4.424648157988138)).title("Parking Alemania"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.7083624215518, -4.41416648632701)).title("Málaga Cruise terminal"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.719128808752735, -4.414080196160326)).title("Parking Muelle Uno"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.72000723055114, -4.4100939844815015)).title("Parking Cervantes"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.72023889429903, -4.408781367656602)).title("Parking de la Malagueta"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.7230797651669, -4.416673675450237)).title("Aparcamiento Alcazaba"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.723002711688146, -4.419805636637146)).title("Parking Granados"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.72381768457455, -4.421638774824797)).title("Parking Tejon y Rodriguez"))
-        mapa.addMarker(MarkerOptions().position(LatLng(36.72610202150593, -4.419189843500244)).title("Parking Atlántida"))
+        mapa.addMarker(getMisMarkers().get(0)) //.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin)));
+        mapa.addMarker(getMisMarkers().get(1))
+        mapa.addMarker(getMisMarkers().get(2))
+        mapa.addMarker(getMisMarkers().get(3))
+        mapa.addMarker(getMisMarkers().get(4))
+        mapa.addMarker(getMisMarkers().get(5))
+        mapa.addMarker(getMisMarkers().get(6))
+        mapa.addMarker(getMisMarkers().get(7))
+        mapa.addMarker(getMisMarkers().get(8))
+        mapa.addMarker(getMisMarkers().get(9))
+        mapa.addMarker(getMisMarkers().get(10))
 
     }
 
@@ -354,8 +374,20 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
     }
 
     //a este metodo se le llama cada vez que el usuario pulsa literalmente en su posicion (el simbolito azul con la flecha)
-    override fun onMyLocationClick(p0: Location) {
-        Toast.makeText(this, "Estás en  ${p0.latitude}, ${p0.longitude} ", Toast.LENGTH_SHORT).show()
+    override fun onMyLocationClick(miPosicion: Location) {
+        Toast.makeText(this, "Estás en  ${miPosicion.latitude}, ${miPosicion.longitude} ", Toast.LENGTH_SHORT).show()
+        comprobarDistancia(miPosicion, getMisMarkers())
+    }
+
+    private fun comprobarDistancia(miPosicion: Location, misMarkers: java.util.ArrayList<MarkerOptions>) {
+
+        //Toast.makeText(this, miPosicion.latitude.toString(), Toast.LENGTH_LONG).show()
+        //val parmetros = Bundle()
+
+        val intent = Intent(this, DistanciaActivity::class.java)
+        intent.putExtra("miLatitud", miPosicion.latitude.toString())
+        intent.putExtra("miLongitud", miPosicion.longitude.toString())
+        startActivity(intent)
     }
 
 }

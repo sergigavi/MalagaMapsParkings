@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MalagaMapsParkings</string>
+    <string name="buscar_parking_m_s_cercano">Buscar parking más cercano</string>
 </resources>
