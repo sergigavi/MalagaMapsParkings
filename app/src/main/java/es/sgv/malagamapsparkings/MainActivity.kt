@@ -369,7 +369,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
     //click en el boton de ir a mi localizacion
     override fun onMyLocationButtonClick(): Boolean {
-        Toast.makeText(this, "Boton pulsado", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Localizando tu posición...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Pulse en el icono azul de su localización para comprobar parkings", Toast.LENGTH_LONG).show()
         return false //asi es por defecto, si le pones true no te lleva a tu localizaconi
     }
 
