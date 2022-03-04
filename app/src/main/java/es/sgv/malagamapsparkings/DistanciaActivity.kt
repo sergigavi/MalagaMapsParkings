@@ -23,22 +23,25 @@ class DistanciaActivity : AppCompatActivity() {
         if (miLatitud !=null && miLongitud!=null){
 
             var distanciaMenor: Double
-            var res = FloatArray(1)
+            var res = FloatArray(15)
             var i2=0
+            var l = getMisMarkers()
 
-            Location.distanceBetween(miLatitud, miLongitud, getMisMarkers().get(0).position.latitude, getMisMarkers().get(0).position.longitude, res)
+            Location.distanceBetween(miLatitud, miLongitud, l.get(0).position.latitude, getMisMarkers().get(0).position.longitude, res)
             distanciaMenor = res[0].toDouble()
 
-            for (i in 0..getMisMarkers().size)
+            for (i in 1..getMisMarkers().size)
             {
-                Location.distanceBetween(miLatitud, miLongitud, getMisMarkers().get(i).position.latitude, getMisMarkers().get(i).position.longitude, res)
+
+                Location.distanceBetween(miLatitud, miLongitud, l.get(i).position.latitude, getMisMarkers().get(i).position.longitude, res)
+
                 if (res[0].toDouble() < distanciaMenor){
                     distanciaMenor = res[0].toDouble()
                     i2=i
                 }
 
             }
-            Toast.makeText(this, "El parking más cercano a tu localización es el de " + getMisMarkers().get(i2).title.toString() + ", a " + distanciaMenor + " metros" , Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "El parking más cercano a tu localización es el de " + getMisMarkers().get(i2).title.toString() + ", a " + distanciaMenor /1000 + " kilómetros" , Toast.LENGTH_LONG).show()
         }
 
     }

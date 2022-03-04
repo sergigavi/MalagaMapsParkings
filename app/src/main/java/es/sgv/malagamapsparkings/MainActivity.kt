@@ -385,6 +385,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
         //val parmetros = Bundle()
 
         val intent = Intent(this, DistanciaActivity::class.java)
+        //intent.putExtra("miPosicion", miPosicion)
         intent.putExtra("miLatitud", miPosicion.latitude.toString())
         intent.putExtra("miLongitud", miPosicion.longitude.toString())
         startActivity(intent)
