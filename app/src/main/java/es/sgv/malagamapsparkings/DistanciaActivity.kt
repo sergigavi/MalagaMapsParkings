@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.lang.Exception
 
 class DistanciaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,17 +31,22 @@ class DistanciaActivity : AppCompatActivity() {
             Location.distanceBetween(miLatitud, miLongitud, l.get(0).position.latitude, getMisMarkers().get(0).position.longitude, res)
             distanciaMenor = res[0].toDouble()
 
-            for (i in 1..getMisMarkers().size)
-            {
+            try {
+                for (i in 1..getMisMarkers().size)
+                {
 
-                Location.distanceBetween(miLatitud, miLongitud, l.get(i).position.latitude, getMisMarkers().get(i).position.longitude, res)
+                    Location.distanceBetween(miLatitud, miLongitud, l.get(i).position.latitude, getMisMarkers().get(i).position.longitude, res)
 
-                if (res[0].toDouble() < distanciaMenor){
-                    distanciaMenor = res[0].toDouble()
-                    i2=i
+                    if (res[0].toDouble() < distanciaMenor){
+                        distanciaMenor = res[0].toDouble()
+                        i2=i
+                    }
+
                 }
+            } catch (e: Exception) {
 
             }
+
             Toast.makeText(this, "El parking más cercano a tu localización es el de " + getMisMarkers().get(i2).title.toString() + ", a " + distanciaMenor /1000 + " kilómetros" , Toast.LENGTH_LONG).show()
         }
 
