@@ -23,6 +23,25 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
     companion object{
         const val REQUEST_CODE_LOCATION = 0
+
+        fun getMisMarkers():ArrayList<MarkerOptions>{
+            var listaMarkers: ArrayList<MarkerOptions>
+
+            listaMarkers = ArrayList()
+            listaMarkers.add(MarkerOptions().position(LatLng(36.717945709280535, -4.4209885597229)).title("Parking Central"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.715757646413046, -4.424395271514863)).title("Garaje Málaga"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.71436751762987, -4.424648157988138)).title("Parking Alemania"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.7083624215518, -4.41416648632701)).title("Málaga Cruise terminal"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.719128808752735, -4.414080196160326)).title("Parking Muelle Uno"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.72000723055114, -4.4100939844815015)).title("Parking Cervantes"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.72023889429903, -4.408781367656602)).title("Parking de la Malagueta"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.7230797651669, -4.416673675450237)).title("Aparcamiento Alcazaba"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.723002711688146, -4.419805636637146)).title("Parking Granados"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.72381768457455, -4.421638774824797)).title("Parking Tejon y Rodriguez"))
+            listaMarkers.add(MarkerOptions().position(LatLng(36.72610202150593, -4.419189843500244)).title("Parking Atlántida"))
+
+            return  listaMarkers
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,24 +115,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
         mapa.addMarker(marker)
     }
 
-    private fun getMisMarkers():ArrayList<MarkerOptions>{
-        var listaMarkers: ArrayList<MarkerOptions>
 
-        listaMarkers = ArrayList()
-        listaMarkers.add(MarkerOptions().position(LatLng(36.717945709280535, -4.4209885597229)).title("Parking Central"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.715757646413046, -4.424395271514863)).title("Garaje Málaga"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.71436751762987, -4.424648157988138)).title("Parking Alemania"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.7083624215518, -4.41416648632701)).title("Málaga Cruise terminal"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.719128808752735, -4.414080196160326)).title("Parking Muelle Uno"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.72000723055114, -4.4100939844815015)).title("Parking Cervantes"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.72023889429903, -4.408781367656602)).title("Parking de la Malagueta"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.7230797651669, -4.416673675450237)).title("Aparcamiento Alcazaba"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.723002711688146, -4.419805636637146)).title("Parking Granados"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.72381768457455, -4.421638774824797)).title("Parking Tejon y Rodriguez"))
-        listaMarkers.add(MarkerOptions().position(LatLng(36.72610202150593, -4.419189843500244)).title("Parking Atlántida"))
-
-        return  listaMarkers
-    }
 
     private fun createMarkers() {
 
@@ -375,7 +377,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
     //a este metodo se le llama cada vez que el usuario pulsa literalmente en su posicion (el simbolito azul con la flecha)
     override fun onMyLocationClick(miPosicion: Location) {
-        Toast.makeText(this, "Estás en  ${miPosicion.latitude}, ${miPosicion.longitude} ", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Estás en  ${miPosicion.latitude}, ${miPosicion.longitude} ", Toast.LENGTH_SHORT).show()
         comprobarDistancia(miPosicion, getMisMarkers())
     }
 
