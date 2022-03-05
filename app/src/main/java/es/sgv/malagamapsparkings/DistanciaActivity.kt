@@ -2,6 +2,7 @@ package es.sgv.malagamapsparkings
 
 import android.location.Location
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -61,15 +62,21 @@ class DistanciaActivity : AppCompatActivity() {
             var tvDistancia:TextView
             tvDistancia = findViewById(R.id.tvDistanciaParkingMasCercano)
 
+            var etManualLatitud: EditText
+            etManualLatitud = findViewById(R.id.etIntroducirLatitud)
+
+            var etManualLongitud: EditText
+            etManualLongitud = findViewById(R.id.etIntroducirLongitud)
+
             //
 
             var respuesta:String = "Tus coordenadas son: Latitud - " + miLatitud + ", Longitud - " + miLongitud + "." + "\nEl parking más cercano a tu localización es el de " + MainActivity.getMisMarkers().get(i2).title.toString() + ", a " + distanciaMenor /1000 + " kilómetros de distancia."
             //Toast.makeText(this, respuesta , Toast.LENGTH_LONG).show()
 
-            txtLatitud.text = miLatitud.toString()
-            txtLongitud.text = miLongitud.toString()
+            txtLatitud.text = "Lat: " + miLatitud.toString()
+            txtLongitud.text = "Long: " + miLongitud.toString()
             tvParkingMasCercano.text = MainActivity.getMisMarkers().get(i2).title.toString()
-            tvDistancia.text = "" +distanciaMenor /1000 + "kilómetros"
+            tvDistancia.text = "" +distanciaMenor /1000 + " kilómetros"
 
         }
 

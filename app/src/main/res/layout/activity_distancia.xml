@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BF5E04"
+    android:background="#DCFFCC"
     tools:context=".DistanciaActivity">
 
 
@@ -14,8 +14,8 @@
         android:layout_height="84dp"
         android:text="Parkings"
         android:textAlignment="center"
-        android:textColor="#EBCD0C"
-        android:textSize="60dp"
+        android:textColor="#EB54FF"
+        android:textSize="72dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintStart_toEndOf="@+id/guideline10"
@@ -184,11 +184,103 @@
         android:text="0 kilómetros"
         android:textSize="20dp"
         android:textAlignment="center"
-        android:textColor="@color/yellowMine"
+        android:textColor="#88A7E8"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
+
+    <TextView
+        android:id="@+id/tvCoordenadasPerso"
+        android:layout_width="129dp"
+        android:layout_height="70dp"
+        android:text="Introduce tus coordenadas manualmente:"
+        android:textColor="#0D71FA"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/guideline18" />
+
+    <TextView
+        android:id="@+id/tvCoordenadasPerso"
+        android:layout_width="129dp"
+        android:layout_height="70dp"
+        android:text="Distancia a coordenadas introducidas:"
+        android:textColor="#9C90FF"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <TextView
+        android:id="@+id/tvDistanciaParkingMasCercano"
+        android:layout_width="159dp"
+        android:layout_height="63dp"
+        android:text="0 kilómetros"
+        android:textAlignment="center"
+        android:textColor="#88A7E8"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <EditText
+        android:id="@+id/etIntroducirLatitud"
+        android:layout_width="190dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="4dp"
+        android:hint="Latitud"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/guideline18" />
+
+    <EditText
+        android:id="@+id/etIntroducirLongitud"
+        android:layout_width="190dp"
+        android:layout_height="33dp"
+        android:hint="Longitud"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline12" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6976744" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="383dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.79480165" />
+
+    <Button
+        android:id="@+id/btnComprobarDistanciaCoordenadasManuales"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="GO"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
