@@ -7,8 +7,9 @@
     android:background="#BF5E04"
     tools:context=".DistanciaActivity">
 
+
     <TextView
-        android:id="@+id/tvDistancia"
+        android:id="@+id/tituloParkings"
         android:layout_width="296dp"
         android:layout_height="84dp"
         android:text="Parkings"
@@ -16,20 +17,97 @@
         android:textColor="#EBCD0C"
         android:textSize="60dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toEndOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"/>
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="326dp"
-        android:layout_height="434dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDistancia" />
+        android:id="@+id/titleCoords"
+        android:layout_width="136dp"
+        android:layout_height="45dp"
+        android:text="Tus coordenadas son:"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintBottom_toTopOf="@+id/guideline13"
+        app:layout_constraintTop_toBottomOf="@+id/guideline14"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        tools:layout_editor_absoluteY="174dp" />
+
+    <TextView
+        android:id="@+id/txtLatitud"
+        android:layout_width="160dp"
+        android:layout_height="25dp"
+        android:text="Latitud"
+        android:textSize="16dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/guideline14"
+        app:layout_constraintBottom_toTopOf="@+id/txtLongitud"/>
+
+    <TextView
+        android:id="@+id/txtLongitud"
+        android:layout_width="160dp"
+        android:layout_height="25dp"
+        android:text="Longitud"
+        android:textSize="16dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/guideline13"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toBottomOf="@+id/txtLatitud"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.050615594" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.16552667" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="57dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8613139" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="193dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2995896" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.23803009" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

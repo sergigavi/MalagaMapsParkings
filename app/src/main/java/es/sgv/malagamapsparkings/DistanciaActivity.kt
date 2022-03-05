@@ -2,6 +2,7 @@ package es.sgv.malagamapsparkings
 
 import android.location.Location
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.model.LatLng
@@ -47,7 +48,21 @@ class DistanciaActivity : AppCompatActivity() {
 
             }
 
-            Toast.makeText(this, "El parking más cercano a tu localización es el de " + getMisMarkers().get(i2).title.toString() + ", a " + distanciaMenor /1000 + " kilómetros" , Toast.LENGTH_LONG).show()
+            //inicializo las variables de la interfaz
+            var txtLatitud:TextView
+            txtLatitud = findViewById(R.id.txtLatitud)
+
+            var txtLongitud:TextView
+            txtLongitud = findViewById(R.id.txtLongitud)
+
+            //
+
+            var respuesta:String = "Tus coordenadas son: Latitud - " + miLatitud + ", Longitud - " + miLongitud + "." + "\nEl parking más cercano a tu localización es el de " + getMisMarkers().get(i2).title.toString() + ", a " + distanciaMenor /1000 + " kilómetros de distancia."
+            //Toast.makeText(this, respuesta , Toast.LENGTH_LONG).show()
+
+            txtLatitud.text = miLatitud.toString()
+            txtLongitud.text = miLongitud.toString()
+
         }
 
     }

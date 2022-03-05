@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
             // aqui va el codigo que quiero que se ejecute con cada click a los markers ->:
             comprobarPrecioParking(marker)
 
-
             false
         })
 
