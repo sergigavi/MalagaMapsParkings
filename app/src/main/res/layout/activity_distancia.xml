@@ -15,7 +15,7 @@
         android:text="Parkings"
         android:textAlignment="center"
         android:textColor="#EB54FF"
-        android:textSize="72dp"
+        android:textSize="68dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintStart_toEndOf="@+id/guideline10"
@@ -205,9 +205,9 @@
 
     <TextView
         android:id="@+id/tvCoordenadasPerso"
-        android:layout_width="129dp"
-        android:layout_height="70dp"
-        android:text="Distancia a coordenadas introducidas:"
+        android:layout_width="171dp"
+        android:layout_height="66dp"
+        android:text="Parking y distancia a coordenadas introducidas:"
         android:textColor="#9C90FF"
         android:textSize="16dp"
         android:textStyle="bold"
@@ -217,7 +217,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <TextView
-        android:id="@+id/tvDistanciaParkingMasCercano"
+        android:id="@+id/tvDistanciaParkingMasCercanoManual"
         android:layout_width="159dp"
         android:layout_height="63dp"
         android:text="0 kilómetros"
@@ -281,6 +281,24 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <Button
+        android:id="@+id/btnListarParkings"
+        android:layout_width="124dp"
+        android:layout_height="70dp"
+        android:text="Listar parkings"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8834587" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
